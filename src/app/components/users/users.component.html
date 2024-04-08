@@ -1,0 +1,39 @@
+<div>
+  <h1>Hello users</h1>
+  <button [hidden]="!getAddPerm()" type="button" class="btn btn-success" (click)="addUser()">AddUser</button>
+  <div *ngIf="getReadPerm()">
+  <div *ngFor="let user of users;" class = "mb-2">
+    <div class="border">
+      <h1>{{user.userID}}</h1>
+      <h3>{{user.name + " " + user.surname}}</h3>
+      <h3>{{user.username}}</h3>
+      <br/>
+<!--      <div *ngFor="let permission of user.permissions;">-->
+<!--        <h3>{{permission.name}}</h3>-->
+<!--      </div>-->
+
+      <div>
+        <h1>Permissions: </h1>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let permission of user.permissions">
+              <th>{{permission.id}}</th>
+              <td>{{permission.name}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <button [hidden]="!getUpdatePerm()" type="button" class="btn btn-primary" bind-id="user.userID" (click)="goToEdit($event)">Edit</button>
+      <button [hidden]="!getDeletePerm()" type="button" class="btn btn-danger" bind-id="user.userID" (click)="deleteUser($event)">Delete</button>
+      <br>
+    </div>
+  </div>
+  </div>
+</div>

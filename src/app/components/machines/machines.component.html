@@ -1,0 +1,104 @@
+<div>
+  <h1>Hello Machines</h1>
+  <h1>Hello msg: {{startInitMsg}}</h1>
+  <div [hidden]="!getCreatePerm()">
+    <button type="button" class="btn btn-success" (click)="goToAddMachine()">AddMachine</button>
+  </div>
+  <div [hidden]="!getSearchPerm()">
+  <form>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="search by name" [(ngModel)]="name">
+    </div>
+
+    <div class="form-group">
+      <label for="status">Status</label>
+      <input type="text" class="form-control" id="status" name="status" placeholder="search by status" [(ngModel)]="status">
+    </div>
+
+    <div>
+      <label>From date: </label>
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a FROM date</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="dateStart" [ngModelOptions]="{standalone:true}">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    </div>
+
+    <div>
+      <label>To date: </label>
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a TO date</mat-label>
+        <input matInput [matDatepicker]="picker2" [(ngModel)]="dateEnd" [ngModelOptions]="{standalone:true}">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+
+    <button type="button" class="btn btn-success" (click)="filterMachines(name,status,dateStart,dateEnd)">Search</button>
+
+  </form>
+  </div>
+
+  <div *ngFor="let machine of machines;" class = "mb-2">
+    <div class="border">
+      <h2>{{machine.id}}</h2>
+      <h2>name: {{machine.name}}</h2>
+      <h2>status: {{machine.status}}</h2>
+      <h2>active: {{machine.active}}</h2>
+      <h2>date crated: {{machine.dateCreated}}</h2>
+
+      <div bind-id="machine.id" [hidden]="!machine.myCircle">
+        <mat-spinner [diameter]="50" *ngIf="spinnerService.visibility | async">
+        </mat-spinner>
+      </div>
+
+      <div class="form-check" bind-id="machine.id">
+        <input class="form-check-input" type="checkbox" value="scheduled" name="scheduled" [(ngModel)]="machine.mySomething">
+        <label class="form-check-label">
+          Scheduled
+        </label>
+      </div>
+
+      <div [hidden]="!machine.mySomething">
+        <div>
+          <label for="seconds">seconds</label>
+          <input type="text" class="form-control" id="seconds" name="seconds" placeholder="enter seconds or *" [(ngModel)]="seconds">
+        </div>
+        <div>
+          <label for="minutes">minutes</label>
+          <input type="text" class="form-control" id="minutes" name="minutes" placeholder="enter minutes or *" [(ngModel)]="minutes">
+        </div>
+        <div>
+          <label for="hours">hours</label>
+          <input type="text" class="form-control" id="hours" name="hours" placeholder="enter hours or *" [(ngModel)]="hours">
+        </div>
+        <div>
+          <label for="day">day</label>
+          <input type="text" class="form-control" id="day" name="day" placeholder="enter day or *" [(ngModel)]="day">
+        </div>
+        <div>
+          <label for="month">month</label>
+          <input type="text" class="form-control" id="month" name="month" placeholder="enter month or *" [(ngModel)]="month">
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-danger"
+             [hidden]="!getDestroyPerm()" *ngIf="!machine.myCircle" bind-id="machine.id" (click)="deleteMachine($event)">Delete</button>
+      <button type="button" class="btn btn-primary"
+              [hidden]="!getStartPerm() || machine.mySomething" *ngIf="!machine.myCircle" bind-id="machine.id" (click)="startTestMachine($event)">Start</button>
+      <button type="button" class="btn btn-primary"
+              [hidden]="!getStartPerm() || !machine.mySomething" *ngIf="!machine.myCircle" bind-id="machine.id" (click)="startScheduledMachine($event)">StartScheduled</button>
+      <button type="button" class="btn btn-secondary"
+              [hidden]="!getStopPerm() || machine.mySomething" *ngIf="!machine.myCircle" bind-id="machine.id" (click)="stopTestMachine($event)">Stop</button>
+      <button type="button" class="btn btn-secondary"
+              [hidden]="!getStopPerm() || !machine.mySomething" *ngIf="!machine.myCircle" bind-id="machine.id" (click)="stopScheduledMachine($event)">StopScheduled</button>
+      <button type="button" class="btn btn-dark"
+              [hidden]="!getRestartPerm() || machine.mySomething" *ngIf="!machine.myCircle" bind-id="machine.id" (click)="restartTestMachine($event)">Restart</button>
+      <button type="button" class="btn btn-dark"
+              [hidden]="!getRestartPerm() || !machine.mySomething" *ngIf="!machine.myCircle" bind-id="machine.id" (click)="restartScheduledMachine($event)">RestartScheduled</button>
+    </div>
+  </div>
+</div>

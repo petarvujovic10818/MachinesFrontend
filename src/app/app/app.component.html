@@ -1,0 +1,22 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a [routerLink]="'/'" class="navbar-brand">Domaci 1</a>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a [routerLink]="'/'" class="nav-link active" aria-current="page">Home</a>
+          <a [hidden]="getMyLoggedIn()" [routerLink]="'/login'" class="nav-link active" aria-current="page">Login</a>
+          <a [hidden]="!getReadPerm() && !getMyLoggedIn()" [routerLink]="'/users'" class="nav-link active" aria-current="page">Users</a>
+          <a [hidden]="!getSearchMachinePerm() && !getMyLoggedIn()" [routerLink]="'/machines'" class="nav-link active" aria-current="page">Machines</a>
+          <a [routerLink]="'/errors'" class="nav-link active" aria-current="page">Errors</a>
+        </div>
+        <p>{{getMyUser()}}</p>
+        <button type="submit" class="btn btn-primary mt-2" [hidden]="!getMyLoggedIn()" (click)="deleteToken()">logout</button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="container pt-3">
+  <router-outlet></router-outlet>
+</div>

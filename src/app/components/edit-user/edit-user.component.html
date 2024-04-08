@@ -1,0 +1,89 @@
+<div class="pt-5 container">
+  <form>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" [(ngModel)]="name">
+    </div>
+    <div class="form-group">
+      <label for="surname">Surname</label>
+      <input type="text" class="form-control" id="surname" name="surname" placeholder="Enter surname" [(ngModel)]="surname">
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" [(ngModel)]="username">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" [(ngModel)]="password">
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="canread" id="canread" name="canread" [(ngModel)]="canread">
+      <label class="form-check-label" for="canread">
+        Can read users
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="cancreate" id="cancreate" name="cancreate" [(ngModel)]="cancreate">
+      <label class="form-check-label" for="cancreate">
+        Can create users
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="canupdate" id="canupdate" name="canupdate" [(ngModel)]="canupdate">
+      <label class="form-check-label" for="canupdate">
+        Can update users
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="candelete" id="candelete" name="candelete" [(ngModel)]="candelete">
+      <label class="form-check-label" for="candelete">
+        Can delete users
+      </label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="cansearchmachines" id="cansearchmachines" name="cansearchmachines" [(ngModel)]="cansearchmachines">
+      <label class="form-check-label" for="cansearchmachines">
+        Can search machines
+      </label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="cancreatemachines" id="cancreatemachines" name="cancreatemachines" [(ngModel)]="cancreatemachines">
+      <label class="form-check-label" for="cancreatemachines">
+        Can create machines
+      </label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="candestroymachines" id="candestroymachines" name="candestroymachines" [(ngModel)]="candestroymachines">
+      <label class="form-check-label" for="candestroymachines">
+        Can destroy machines
+      </label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="canstartmachines" id="canstartmachines" name="canstartmachines" [(ngModel)]="canstartmachines">
+      <label class="form-check-label" for="canstartmachines">
+        Can start machines
+      </label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="canstopmachines" id="canstopmachines" name="canstopmachines" [(ngModel)]="canstopmachines">
+      <label class="form-check-label" for="canstopmachines">
+        Can stop machines
+      </label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="canrestartmachines" id="canrestartmachines" name="canrestartmachines" [(ngModel)]="canrestartmachines">
+      <label class="form-check-label" for="canrestartmachines">
+        Can restart machines
+      </label>
+    </div>
+
+    <button [hidden]="!getReadPerm()" type="submit" class="btn btn-primary mt-2" (click)="updateUser()">Submit</button>
+  </form>
+</div>

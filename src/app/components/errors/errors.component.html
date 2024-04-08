@@ -1,0 +1,16 @@
+
+<h1 *ngIf="errors.length==0">NO ERRORS</h1>
+
+<div *ngFor="let error of errors;" class = "mb-2">
+  <h1>{{error.id}}.</h1>
+  <div class="border">
+    <p>machine name: </p>
+    <h2>{{error.machine.name}}</h2>
+    <p>operation failed: </p>
+    <h2>{{error.operationFailed}}</h2>
+    <p>message error: </p>
+    <h2>{{error.messageError}}</h2>
+    <p>date error: </p>
+    <h2>{{error.dateError}}</h2>
+  </div>
+</div>
